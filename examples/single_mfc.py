@@ -20,11 +20,12 @@ class MFC:
         self.device.set_user_defined_medium_unit(self.unit)
 
         print(f'Version: {self.device.get_product_name()}\nProduct Name: {self.device.get_product_name()}\nArticle Code: {self.device.get_article_code()}')
+        
 
     def run(self):
         self.val = 0
         while self.val != -1:
-            self.val = int(input('Type in 0 to turn off, 1 to turn on, 999 to exit the system: '))
+            self.val = int(input('Type in 0 to turn off, 1 to turn to max, -1 to exit the system: '))
             if self.val == -1:
                 break
             else:
@@ -39,10 +40,13 @@ class MFC:
     def set_value(self, val):
         if val == 0:
             _ = 0
-            logging.info("Turning MFC Off")
-        else:
+            logging.info("Turning MFC OFF")
+        elif val == 1:
             _ = 10000
             logging.info("Turning MFC to MAX")
+        else:
+            _ = val
+            logging.info(f"Turning MFC to {_}")
         self.device.set_setpoint(_, Sfc5xxxScaling.USER_DEFINED)
         logging.info(f"New setpoint of {val}")
 
@@ -56,10 +60,14 @@ def main():
     
     if args.w_port:
         mfc = MFC(args.w_port)
+        # print(args.w_port)
+        mfc.run()
     
     elif args.u_port:
         mfc = MFC(args.u_port)
-
+        # print(args.u_port)
+        mfc.run()
+    
     else:
         print("Please specify a COM port using -COMx (e.g., -COM3)")
 
