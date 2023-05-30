@@ -51,7 +51,7 @@ class MFC:
 def main():
     parser = argparse.ArgumentParser(description='MFC Connector')
     parser.add_argument('-COM', dest='w_port', type=str, help='Define Port for MFC - Windows')
-    parser.add_argument('/dev/ttyUSB', dest='u_port', type=str, help='Define Port for MFC - Ubuntu')
+    parser.add_argument('-COMU', dest='u_port', type=str, help='Define Port for MFC - Ubuntu')
     args = parser.parse_args()
     
     if args.w_port:
